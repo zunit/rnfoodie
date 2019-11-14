@@ -6,30 +6,28 @@ import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'reac
 // Model Data 
 import { CATEGORIES } from '../data/dummy-data';
 
-// constants
+// Component
+import CategoryGridTile from '../components/CategoryGridTile';
+
+// Constants
 import Colors from '../constant/Colors';
 
 const CategoriesScreen = props => {
 
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity
-            style={styles.gridItem}
-            onPress={() => {
+            <CategoryGridTile  
+            title={itemData.item.title} 
+            color={itemData.item.color}
+            onSelect={() => {
                 props.navigation.navigate({
                     routeName: 'CategoryMeals',
                     params: {
                         categoryId: itemData.item.id
                     }
-                })
+                });
             }}
-            >
-                <View >
-                    <Text>
-                        {itemData.item.title}
-                    </Text>
-                </View>
-            </TouchableOpacity>
+            />
         );
     }
     return (
@@ -52,16 +50,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    gridItem: {
-        flex: 1,
-        margin: 15,
-        height: 150, 
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 2, 
-        borderColor: 'grey',
-        borderRadius: 8
-    }
+
 });
 
 export default CategoriesScreen;
